@@ -1,0 +1,62 @@
+### acceleration: Use unsloth alone or flash attention + ligerkernel 
+flash_attn: fa2
+enable_liger_kernel: True
+# ---------------------------
+# use_unsloth: True
+# use_unsloth_gc: True
+
+### model
+model_name_or_path: allenai/Llama-3.1-Tulu-3-8B-SFT
+# model_name_or_path: /p/scratch/taco-vlm/su5/hf_cache/allenai-Llama-3.1-Tulu-3-8B-SFT
+quantization_bit: 4  # choices: [8 (bnb/hqq/eetq), 4 (bnb/hqq), 3 (hqq), 2 (hqq)]
+quantization_method: bnb  # choices: [bnb, hqq, eetq]
+trust_remote_code: true
+
+### method
+stage: dpo
+do_train: true
+finetuning_type: lora
+lora_rank: 8
+lora_target: all
+pref_beta: 5.0                  
+pref_loss: sigmoid  # choices: [sigmoid (dpo), orpo, simpo]
+
+### dataset
+dataset: delta-Qwen2.5-3B-1.5B
+dataset_dir: data
+template: llama3
+cutoff_len: 2048 # 4096
+# max_samples: 1000 # for sanity test
+overwrite_cache: true
+preprocessing_num_workers: 40
+dataloader_num_workers: 16
+
+### output
+output_dir: saves/tulu-3_delta-qwen_qlora
+logging_steps: 50
+save_steps: 500
+plot_loss: true
+overwrite_output_dir: true
+save_only_model: false
+report_to: none  # choices: [none, wandb, tensorboard, swanlab, mlflow]
+
+### train
+seed: 42                       
+per_device_train_batch_size: 2
+gradient_accumulation_steps: 4
+learning_rate: 1.0e-7 
+num_train_epochs: 1.0
+lr_scheduler_type: cosine
+warmup_ratio: 0.03
+bf16: true
+gradient_checkpointing: true   # Enable gradient checkpointing to save memory
+optim: adamw_torch             # Use the AdamW optimizer
+ddp_timeout: 180000000
+resume_from_checkpoint: null
+
+### eval
+# eval_dataset: dpo_en_demo
+# val_size: 0.1
+# per_device_eval_batch_size: 1
+# eval_strategy: steps
+# eval_steps: 500
