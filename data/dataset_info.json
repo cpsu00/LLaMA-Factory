@@ -12,7 +12,7 @@
         "file_name": "delta-Qwen2.5-3B-1.5B-ppl_clean.jsonl",
         "ranking": true,
         "columns": {
-            "prompt": "instruction",
+            "prompt": "prompt",
             "chosen": "chosen",
             "rejected": "rejected"
         }

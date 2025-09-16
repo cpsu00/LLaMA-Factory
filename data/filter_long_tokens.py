@@ -3,11 +3,11 @@ from transformers import AutoTokenizer
 from tqdm import tqdm
 
 # --- CONFIGURE THESE VALUES ---
-model_name = "/p/scratch/taco-vlm/su5/hf_cache/allenai-Llama-3.1-Tulu-3-8B-SFT"
+model_name = "allenai/Llama-3.1-Tulu-3-8B-SFT"
 # Input file with the oversized samples
-input_dataset_path = "/p/project/taco-vlm/su5/LLaMA-Factory/data/delta-Qwen2.5-3B-1.5B.jsonl"
+input_dataset_path = "delta-Qwen2.5-3B-1.5B.jsonl"
 # Name for the new, cleaned output file
-output_dataset_path = "/p/project/taco-vlm/su5/LLaMA-Factory/data/delta-Qwen2.5-3B-1.5B_clean.jsonl"
+output_dataset_path = "delta-Qwen2.5-3B-1.5B_clean.jsonl"
 
 # You can set this to 8192 since Llama 3 supports it, but 4096 is also fine.
 # Let's use 8192 to keep more data, but you can change it back if you want.

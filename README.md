@@ -1,3 +1,46 @@
+## 🔑 Key Changes to LLaMA-Factory
+
+### 1. **Generation scripts for preference data**
+
+Slurm/SH scripts to generate responses for the
+`allenai/llama-3.1-tulu-3-8b-preference-mixture` dataset:
+
+* `KD/generate_llama3.2_1b.slurm`
+* `KD/generate_llama3.2_3b.slurm`
+* `KD/generate_qwen2.5_1.5b.slurm`
+* `KD/generate_qwen2.5_3b.slurm`
+
+---
+
+### 2. **Training & configuration**
+
+* `KD/merge_config.slurm` → script to merge QLoRA adapters
+* `KD/train.slurm` → training script
+* `KD/tulu-3__delta-qwen___qlora-dpo.yaml` → config for delta training
+* `KD/tulu-3__delta-qwen-ppl___qlora-dpo.yaml` → config for ppl-based delta training
+
+---
+
+### 3. **Dataset utilities & definitions**
+
+* **`data/dataset_info.json`** → added:
+
+  * `delta-Qwen2.5-3B-1.5B` → delta learning dataset (Qwen), removed prompts exceeding 2048 tokens
+  * `delta-Qwen2.5-3B-1.5B-ppl` → perplexity-based delta learning dataset (Qwen), removed prompts exceeding 2048 tokens
+  * `tulu-3-deduplicated` → deduplicated version of the `allenai/llama-3.1-tulu-3-8b-preference-mixture` dataset
+
+* **`data/deduplicate_prompts.py`** → script to deduplicate prompts in the Tulu dataset
+
+* **`data/filter_long_tokens.py`** → script to filter out samples with overly long input tokens
+
+---
+
+### 4. **Core training modification**
+
+* `src/llamafactory/train/dpo/trainer.py` → added **length normalization** (following Delta paper)
+
+---
+
 ![# LLaMA Factory](assets/logo.png)
 
 [![GitHub Repo stars](https://img.shields.io/github/stars/hiyouga/LLaMA-Factory?style=social)](https://github.com/hiyouga/LLaMA-Factory/stargazers)

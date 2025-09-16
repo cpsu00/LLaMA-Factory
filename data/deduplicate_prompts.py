@@ -4,7 +4,7 @@ from datasets import load_dataset
 # --- Configuration ---
 ORIGINAL_DATASET = "allenai/llama-3.1-tulu-3-8b-preference-mixture"
 PROMPT_COLUMN = "prompt"
-OUTPUT_FILE = "data/tulu-3-deduplicated.jsonl"
+OUTPUT_FILE = "tulu-3-deduplicated.jsonl"
 
 def create_unique_prompt_dataset():
     print(f"Loading original dataset: {ORIGINAL_DATASET}...")
