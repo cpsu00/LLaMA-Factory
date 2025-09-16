@@ -12,6 +12,26 @@ pip install -e ".[torch,metrics,liger-kernel,bitsandbytes,vllm]" --no-build-isol
 # Replace the URL below with the correct version for your CUDA, PyTorch, and Python (flash_attn-[FlashAttention Version]+cu[CUDA Version]torch[PyTorch Version]-cp[Python Version]-cp[Python Version]-linux_x86_64.whl)
 pip install https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.0.0/flash_attn-2.6.3+cu124torch2.5-cp312-cp312-linux_x86_64.whl
 ```
+## 📂 Datasets
+
+Download the following datasets and place the `.jsonl` files under `./data/`:
+
+```bash
+mkdir -p data
+
+# Tulu 3 8B Preference Mixture (deduplicated)
+wget -O data/tulu-3-deduplicated.jsonl \
+  https://huggingface.co/datasets/cpsu04/tulu-3-deduplicated/resolve/main/tulu-3-deduplicated.jsonl
+
+# Delta Learning Preference Qwen2.5 3B over 1B (removed prompts exceeding 2048 tokens)
+wget -O a.jsonl \
+  https://huggingface.co/datasets/cpsu04/delta-Qwen2.5-3B-1.5B-clean/resolve/main/delta-Qwen2.5-3B-1.5B_clean.jsonl
+
+# Perplexity-based Delta Learning Preference Qwen2.5 3B over 1B (removed prompts exceeding 2048 tokens)
+wget -O data/delta-Qwen2.5-3B-1.5B-ppl_clean.jsonl \
+  https://huggingface.co/datasets/cpsu04/delta-Qwen2.5-3B-1.5B-ppl-clean/resolve/main/delta-Qwen2.5-3B-1.5B-ppl_clean.jsonl
+
+```
 
 ## 🔑 Key Changes to LLaMA-Factory
 
@@ -28,20 +48,20 @@ Scripts to generate responses for the
 
 ### 2. **Training & configuration**
 
-* `KD/merge_config.slurm` → script to merge QLoRA adapters
 * `KD/train.slurm` → training script
 * `KD/tulu-3__delta-qwen___qlora-dpo.yaml` → config for delta training
 * `KD/tulu-3__delta-qwen-ppl___qlora-dpo.yaml` → config for ppl-based delta training
+* `KD/merge_config.slurm` → script to merge QLoRA adapters
 
 ### 3. **Dataset utilities & definitions**
 
 * **`data/dataset_info.json`** → added:
 
-  * `delta-Qwen2.5-3B-1.5B` → delta learning dataset (Qwen), removed prompts exceeding 2048 tokens
-  * `delta-Qwen2.5-3B-1.5B-ppl` → perplexity-based delta learning dataset (Qwen), removed prompts exceeding 2048 tokens
   * `tulu-3-deduplicated` → deduplicated version of the `allenai/llama-3.1-tulu-3-8b-preference-mixture` dataset
+  * `delta-Qwen2.5-3B-1.5B` → delta learning dataset (Qwen)
+  * `delta-Qwen2.5-3B-1.5B-ppl` → perplexity-based delta learning dataset (Qwen)
 
-* **`data/deduplicate_prompts.py`** → script to deduplicate prompts in the Tulu dataset
+* **`data/deduplicate_prompts.py`** → script to deduplicate prompts in the original Tulu preference dataset
 
 * **`data/filter_long_tokens.py`** → script to filter out samples with overly long input tokens
 
