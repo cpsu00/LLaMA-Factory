@@ -2,7 +2,7 @@
 
 ### 1. **Generation scripts for preference data**
 
-Slurm/SH scripts to generate responses for the
+Scripts to generate responses for the
 `allenai/llama-3.1-tulu-3-8b-preference-mixture` dataset:
 
 * `KD/generate_llama3.2_1b.slurm`
@@ -10,7 +10,6 @@ Slurm/SH scripts to generate responses for the
 * `KD/generate_qwen2.5_1.5b.slurm`
 * `KD/generate_qwen2.5_3b.slurm`
 
----
 
 ### 2. **Training & configuration**
 
@@ -18,8 +17,6 @@ Slurm/SH scripts to generate responses for the
 * `KD/train.slurm` → training script
 * `KD/tulu-3__delta-qwen___qlora-dpo.yaml` → config for delta training
 * `KD/tulu-3__delta-qwen-ppl___qlora-dpo.yaml` → config for ppl-based delta training
-
----
 
 ### 3. **Dataset utilities & definitions**
 
@@ -33,7 +30,6 @@ Slurm/SH scripts to generate responses for the
 
 * **`data/filter_long_tokens.py`** → script to filter out samples with overly long input tokens
 
----
 
 ### 4. **Core training modification**
 
