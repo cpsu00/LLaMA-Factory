@@ -222,7 +222,7 @@ class CustomDPOTrainer(DPOTrainer):
         all_logps, valid_length = get_batch_logps(
             logits=all_logits, labels=batch["labels"], ld_alpha=(self.ld_alpha if not is_ref_model else None)
         )
-        if self.loss_type in ["ipo", "orpo", "simpo"]:
+        if self.loss_type in ["dpo", "ipo", "orpo", "simpo"]: # delta paper uses length-normalization 
             all_logps = all_logps / valid_length
 
         batch_size = batch["input_ids"].size(0) // 2

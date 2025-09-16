@@ -177,3 +177,17 @@ wandb/
 swanlog/
 generated_predictions.jsonl
 predictions_score.json
+
+# ---
+logs/
+saves/
+
+# Local datasets
+data/delta-Qwen2.5-3B-1.5B-ppl.jsonl
+data/delta-Qwen2.5-3B-1.5B-ppl_clean.jsonl
+data/delta-Qwen2.5-3B-1.5B.jsonl
+data/delta-Qwen2.5-3B-1.5B_clean.jsonl
+data/tulu-3-deduplicated.jsonl
+
+# Unsloth cache
+unsloth_compiled_cache/
