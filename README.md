@@ -8,9 +8,9 @@ cd LLaMA-Factory
 # 2. Install LLaMA-Factory with optional dependencies
 pip install -e ".[torch,metrics,liger-kernel,bitsandbytes,vllm]" --no-build-isolation
 
-# 3. (Optional) Install FlashAttention prebuilt wheel
+# 3. (Optional) Install FlashAttention prebuilt wheel, see https://github.com/mjun0812/flash-attention-prebuild-wheels
 # Replace the URL below with the correct version for your CUDA, PyTorch, and Python (flash_attn-[FlashAttention Version]+cu[CUDA Version]torch[PyTorch Version]-cp[Python Version]-cp[Python Version]-linux_x86_64.whl)
-pip install https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.0.0/flash_attn-2.6.3+cu124torch2.5-cp312-cp312-linux_x86_64.whl
+pip install https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.0.8/flash_attn-2.7.4.post1+cu126torch2.7-cp311-cp311-linux_x86_64.whl
 ```
 ## 📂 Datasets
 
