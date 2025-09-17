@@ -51,6 +51,9 @@ warmup_ratio: 0.03
 bf16: true
 gradient_checkpointing: true   # Enable gradient checkpointing to save memory
 optim: adamw_torch             # Use the AdamW optimizer
+adam_beta1: 0.9          
+adam_beta2: 0.95         
+weight_decay: 0.0
 ddp_timeout: 180000000
 resume_from_checkpoint: null
 
